@@ -115,3 +115,54 @@ UPDATE Employees2 SET Salary = @Salary WHERE Name = @Name"; // Modify query as n
         }
     }
 }
+
+
+
+
+//Query
+
+
+/*
+ 
+ USE C21_DB1;
+
+-- Declare variables to capture execution time
+DECLARE @StartTime DATETIME2(7), @EndTime DATETIME2(7);
+
+-- Capture the start time
+SET @StartTime = SYSDATETIME();
+
+-- Optimized query to update salaries
+UPDATE Employees2
+SET Salary = Salary * 
+    CASE 
+        WHEN PerformanceRating > 90 THEN 1.15
+        WHEN PerformanceRating BETWEEN 75 AND 90 THEN 1.10
+        WHEN PerformanceRating BETWEEN 50 AND 74 THEN 1.05
+        ELSE 1.00
+    END
+WHERE PerformanceRating IS NOT NULL; -- Add a filter to exclude unnecessary rows
+
+-- Capture the end time
+SET @EndTime = SYSDATETIME();
+
+-- Output the execution time in milliseconds
+SELECT DATEDIFF(MILLISECOND, @StartTime, @EndTime) AS ExecutionTimeMilliseconds;
+
+ */
+
+
+
+// Coclusion
+
+/*
+ Using C# in ADo.Net  the StopWatch give : 
+  - minimum: 131 ms
+  - maximum: 286 ms
+  - Average: 188 ms
+Using T-SQL:
+  - minimum: 5 ms
+  - maximum: 7 ms
+  - average: 6 ms
+This mean in Total T-SQL more better and Speed for C# (optimse) by 31 time 
+ */
